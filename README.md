@@ -1,10 +1,29 @@
 # ML-Programming-Task
 
-I broke up this task into two parts: the NLP portion (1.1/1.3) and the machine learning portion (1.2).
+I approached this task by breaking it down into two distinct components: the NLP segment (1.1/1.3) and the machine learning aspect (1.2).
 
-For both, I started off with processing the validated.tsv dataset to isolate the first 100 clips for the NLP, and the first 1000 clips with the "male" or "female" gender labels to train the model.
+For the NLP section, I initially focused on processing the validated.tsv dataset. My goal here was to isolate the first 100 clips for analysis. In parallel, I zeroed in on the first 1000 clips with "male" or "female" gender labels to facilitate model training.
 
-For the NLP portion I found the Word Error Rate of the Whisper Model by implementing my own function that calculated the distance from each word in the hypothesis sentence (Whisper model) to each word in the reference sentence (ground truth given the validated dataset). I used the formula (insertions + deletions + substitutions)/number of words to calculate the WER as a percentage, applied to each pair of clips in the dataset, and calculated the mean error which was 15.36%. The Whisper model is said to have a word error rate of around 10%, and considering that I only had 100 data points, I was not too far off. I also found the cosine similarity of all the clips to one another, by vectorizing them, and the using the cosine_similairty functions from sklearn. All the cosine similarities were stored in a matrix, and with this information, we can group the clips together based on the ones that have a high cosine similarity. Next, I found the 100 most common words using the NLTK library which has a lot of NLP algorithms. The top five most common words were "the", "of", "and", "The", and "to", which makes sense because all of these words are used very frequently in English as they are conjuection words. Then, I found the sentiment scores for each clip, and I included both the polarity of the clips and the sbjectivity, which gives how negative or positive the statement is and how biased the statement is, respectively. Finally, I found the token-type ratio which basically gives the diversity in vocabulary of the clips. Type-token ratio gives the ratio between the number of unique words and the total number of words. For all ten groups, the TTR was very high, but the clips were also very short in length so the TTR becomes less meaningful. 
+Regarding the NLP component, I evaluated the Whisper Model's performance by calculating the Word Error Rate (WER). I wrote a function to determine the distance between each word in the model's output (the hypothesis sentence) and the corresponding word in the reference sentence sderived from the validated dataset (considered the ground truth). The WER, expressed as a percentage, was computed using the formula (insertions + deletions + substitutions) divided by the total number of words. My analysis yielded a mean error rate of 15.36%. It's worth noting that the Whisper model typically achieves a WER of around 10%. Given my limited dataset of 100 clips, my results were reasonably close.
 
-For the machine leanring portion, I had to create a model that predicted the gender of the speaker in the clip. The first step was thec create a dataset to train the model on. I used the librosa library to pull a lot of acoustic data, and once I had the dataframe with all the feature data and the target labels, I had to choose what kind of model I wanted to use. I had 3 options, logistic regression, random forest tree, and a neural network. I didn't choose logistic regression because it had the risk of over-fitting to the dataset, and I didn't choose a neural network because I felt that I did not have enough data to train the model. So I traied the random forst classifier and got an accuracy score of 87.50% which is pretty good. I also generated the confusion matrix and the ROC curve. I had an ROC curve area of 0.95 which is considered very good. 
+In addition to assessing WER, I also examined the cosine similarity among all the clips. To achieve this, I vectorized the clips using TfidfVectorizer and used cosine_similarity function from sklearn and got an output of a 100x100 matrix where matrix[i][j] represented the similarity between clip i and clip j.
+
+Then, wth the NLTK library, I identified the 100 most common words within the dataset. The top five most frequently occurring words were "the," "of," "and," "The," and "to." These findings make sense, as these words are common conjunctions frequently used in English.
+
+I proceeded to analyze sentiment within the clips, assessing both polarity and subjectivity. Polarity provides insight into whether the statement leans toward a negative or positive sentiment, while subjectivity gauges the degree of bias in the statement.
+
+Finally, I explored the token-type ratio (TTR), which offers insight into vocabulary diversity. TTR measures the ratio of unique words to the total number of words. The TTR for the ten groups of clips were very high, but TTR becomes less meaningful as the texts become shorter, as the probability of words repeating drops. 
+
+Shifting to the machine learning aspect, I began by creating a dataset for training a model capable of predicting the gender of the speaker in each clip. To achieve this, I utilized the librosa library to extract a range of acoustic features. Once I had assembled the feature data and target labels within a dataframe, I needed to select an appropriate machine learning model.
+
+I considered three options: logistic regression, random forest trees, and a neural network. To mitigate the risk of overfitting, I opted against logistic regression. Furthermore, due to the limited dataset size, I decided against employing a neural network. Ultimately, I implemented a random forest classifier and achieved an impressive accuracy score of 87.50%.
+
+In addition to accuracy, I evaluated the model's performance through the generation of a confusion matrix and an ROC curve. The model exhibited a strong ROC curve area of 0.95, which is considered highly favorable, and it successfully predicted the gender of the speakers.
+
+In conclusion, this task provided an engaging opportunity for analysis and modeling, and I look forward to the possibility of contributing to the Voice Project.
+
+
+
+
+
  
