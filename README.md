@@ -22,7 +22,7 @@ In addition to accuracy, I evaluated the model's performance through the generat
 
 In conclusion, this task provided an engaging opportunity for analysis and modeling, and I look forward to the possibility of contributing to the Voice Project.
 
-
+Here is the link to the video for my project: https://clipchamp.com/watch/QJKp0Z4UtXK
 
 
 
